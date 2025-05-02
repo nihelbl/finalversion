@@ -1,5 +1,9 @@
 package p1;
 import p0.Utilisateur;
+import p0.ATS;
+import p0.Enseignant;
+import p0.Etudiant;
+import monprojet.enums.StatutUser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,9 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import p0.ATS;
-import p0.Enseignant;
-import p0.Etudiant;
+
+
 
 
 /**
@@ -227,7 +230,7 @@ public class Administration {
         System.out.println("=============== TOP " + limit + " CHAUFFEURS ===============");
         
         List<Utilisateur> chauffeurs = this.utilisateurs.stream()
-                .filter(u -> u.getProfil() != null && u.getProfil().getStatut() == Statut.CHAUFFEUR)
+                .filter(u -> u.getProfil() != null && u.getProfil().getStatut() == StatutUser.chauffeur)
                 .sorted(Comparator.comparing(Utilisateur::getReputation).reversed())
                 .limit(limit)
                 .collect(Collectors.toList());
