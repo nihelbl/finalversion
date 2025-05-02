@@ -1,4 +1,5 @@
 package p1;
+import p0.Utilisateur;
 import java.util.List;
 import monprojet.enums.JourSemaine;
 import monprojet.enums.DisponibiliteType;

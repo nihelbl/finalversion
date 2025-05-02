@@ -1,5 +1,5 @@
 package monprojet.enums;
 
 public enum Statut {
-    CHAUFFEUR, PASSAGER
+	en_cours, terminee
 }
