@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
-
-
 /**
  * Classe Administration qui gère l'ensemble des utilisateurs et des courses.
  * Implémente également un système d'authentification pour les administrateurs.

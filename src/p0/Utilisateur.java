@@ -103,7 +103,11 @@ public abstract class Utilisateur {
         return id;
     }
     public Profil getProfil() {
-        return profil;
+        return profil;}
+    
+    public String getMatricule() {
+        return matricule;}
+    public double getReputation() {
+    	return reputation;}
+    }
 
-}
-}
