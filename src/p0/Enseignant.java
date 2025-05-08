@@ -1,14 +1,17 @@
 package p0;
 import p1.Profil;
+import p1.Evaluation;
 public class Enseignant extends Utilisateur {
     private int anneeRecrutement;
     private String faculte;
+
 
     public Enseignant(String nom, String prenom, String matricule, Profil profil,
                       int anneeRecrutement, String faculte) {
         super(nom, prenom, matricule, profil);
         this.anneeRecrutement = anneeRecrutement;
         this.faculte = faculte;
+        
     }
 
     @Override
@@ -23,8 +26,15 @@ public class Enseignant extends Utilisateur {
         System.out.println("Enseignant - Année de recrutement : " + anneeRecrutement);
         System.out.println("Faculté : " + faculte);
     }
+    @Override
+      public void ajouterEvaluation(Evaluation evaluation) {
+        super.ajouterEvaluation(evaluation); // conserve logique de mise à jour + commentaires + réputation
+    }
+    @Override
+    public void afficherHistorique() {
+        super.afficherHistorique();
+    }
 }
-
 
 
 

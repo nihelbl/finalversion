@@ -2,6 +2,7 @@ package p1;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Planning {
     private List<Course> coursesEnCours;
     private List<Course> coursesAvenir;

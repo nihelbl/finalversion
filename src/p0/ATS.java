@@ -1,5 +1,6 @@
 package p0;
 import p1.Profil;
+import p1.Evaluation;
 public class ATS extends Utilisateur {
     private int anneeRecrutement;
     private String serviceRattachement;
@@ -23,5 +24,12 @@ public class ATS extends Utilisateur {
         System.out.println("ATS - Année de recrutement : " + anneeRecrutement);
         System.out.println("Service : " + serviceRattachement);
     }
+    @Override
+      public void ajouterEvaluation(Evaluation evaluation) {
+        super.ajouterEvaluation(evaluation); // conserve logique de mise à jour + commentaires + réputation
+    }
+    @Override
+    public void afficherHistorique() {
+        super.afficherHistorique();
+    }
 }
-

@@ -80,6 +80,9 @@ public class Course {
     public Disponibilites getDisponibilite() {
         return disponibilite;
     }
+    public Itineraire getItineraire(){
+        return itineraire;
+    }
 
     public void afficherDetails() {
         System.out.println("========== Details de la Course ==========");

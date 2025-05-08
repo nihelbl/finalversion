@@ -110,4 +110,3 @@ public abstract class Utilisateur {
     public double getReputation() {
     	return reputation;}
     }
-

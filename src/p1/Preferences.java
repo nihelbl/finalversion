@@ -1,27 +1,28 @@
 package p1;
 import p0.Utilisateur;
+import monprojet.enums.PreferenceType;
 import java.util.Map;
 import java.util.HashMap;
 
 public class Preferences {
-    private Map<String, String> preferences;
+    private Map<PreferenceType, String> preferences;
     public Preferences() {
         this.preferences = new HashMap<>();
     }
-    public String getPreference(String cle) {
+    public String getPreference(PreferenceType cle) {
         return preferences.get(cle);
     }
-    public void ajouterPreference(String cle, String valeur) {
+    public void ajouterPreference(PreferenceType cle, String valeur) {
         preferences.put(cle, valeur);
     }
-    public void modifierPreference(String cle, String nouvelleValeur) {
+    public void modifierPreference(PreferenceType cle, String nouvelleValeur) {
         preferences.put(cle, nouvelleValeur);
     }
-    public void supprimerPreference(String cle) {
+    public void supprimerPreference(PreferenceType cle) {
         preferences.remove(cle);
     }
     public void afficherPreferences() {
-        for (String cle : preferences.keySet()) {
+        for (PreferenceType cle : preferences.keySet()) {
             System.out.println(cle + ": " + preferences.get(cle));
         }
     }

@@ -61,7 +61,10 @@ public class HistoriqueUtilisateur {
 
         System.out.println("— Évaluations reçues —");
         for (Evaluation e : evaluations) {
-            System.out.println("- Note : " + e.getNoteGlobale() + " | Commentaire : " + e.getCommentaire());
+            System.out.println("- Critère : " + e.getCritereEvaluation() +
+                   " | Note : " + e.getNoteGlobale() +
+                   " | Commentaire : " + e.getCommentaire() );
+
         }
     }
 }

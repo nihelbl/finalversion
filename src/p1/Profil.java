@@ -40,29 +40,19 @@ public class Profil {
     }
 
     public boolean estDisponible(LocalDateTime dateHeure) {
-        JourSemaine jour = fromDayOfWeek(dateHeure.getDayOfWeek());
+    	JourSemaine jour = JourSemaine.from(dateHeure.getDayOfWeek());
         return disponibilites.getJoursDisponibles().contains(jour);
     }
     
-    private JourSemaine fromDayOfWeek(DayOfWeek dayOfWeek) {
-        switch (dayOfWeek) {
-            case MONDAY: return JourSemaine.LUNDI;
-            case TUESDAY: return JourSemaine.MARDI;
-            case WEDNESDAY: return JourSemaine.MERCREDI;
-            case THURSDAY: return JourSemaine.JEUDI;
-            case FRIDAY: return JourSemaine.VENDREDI;
-            case SATURDAY: return JourSemaine.SAMEDI;
-            case SUNDAY: return JourSemaine.DIMANCHE;
-            default: throw new IllegalArgumentException("Jour inconnu: " + dayOfWeek);
-        }
-    }
-
+    
     public void afficherProfil() {
-        System.out.println("Statut: " + statut);
-        System.out.println("Type de course: " + typeCourse);
-        itineraire.afficherItineraire();
-        preferences.afficherPreferences();
-        disponibilites.afficherDisponibilite();
+        System.out.println("Profil{" +
+            "statut=" + statut +
+            ", typeCourse=" + typeCourse +
+            ", itineraire=" + itineraire +
+            ", preferences=" + preferences +
+            ", disponibilites=" + disponibilites +
+            '}');
     }
 
     // Getters (si besoin)

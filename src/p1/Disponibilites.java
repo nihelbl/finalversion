@@ -1,5 +1,4 @@
 package p1;
-import p0.Utilisateur;
 import java.util.List;
 import monprojet.enums.JourSemaine;
 import monprojet.enums.DisponibiliteType;
@@ -19,7 +18,9 @@ public class Disponibilites {
     public void setJoursDisponibles(List<JourSemaine> joursDisponibles) { this.joursDisponibles = joursDisponibles; }
     public String getHeureDepart() { return heureDepart; }
     public void setHeureDepart(String heureDepart) { this.heureDepart = heureDepart; }
-
+    public DisponibiliteType getType() { return type; }
+    public void setType(DisponibiliteType type) { this.type = type; }
+    
     public void ajouterJourDisponible(JourSemaine jour) {
         if (!joursDisponibles.contains(jour)) {
             joursDisponibles.add(jour);
@@ -33,4 +34,12 @@ public class Disponibilites {
     public void afficherDisponibilite() {
         System.out.println("Disponibilité à " + heureDepart + " les jours : " + joursDisponibles);
     }
+    public void afficherDisponibilites() {
+        System.out.println("Disponibilites{" +
+            "joursDisponibles=" + joursDisponibles +
+            ", heureDepart='" + heureDepart + '\'' +
+            ", type=" + type +
+            '}');
+    }
+
 }

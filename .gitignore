@@ -1,0 +1,24 @@
+# Ignorer les fichiers système
+.VirtualBox/
+.config/
+.eclipse/
+.git-for-windows-updater
+.gitconfig
+.p2/
+.redhat/
+.th-client/
+.vscode/
+
+# Ignorer les fichiers temporaires
+*.log
+*.dat
+*.tmp
+
+# Ignorer les fichiers de l'OS
+*.swp
+*.bak
+
+# Ignorer les répertoires communs
+node_modules/
+OneDrive/
+Oracle/
