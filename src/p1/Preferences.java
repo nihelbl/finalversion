@@ -6,24 +6,26 @@ import java.util.HashMap;
 
 public class Preferences {
     private Map<PreferenceType, String> preferences;
+    
     public Preferences() {
-        this.preferences = new HashMap<>();
-    }
-    public String getPreference(PreferenceType cle) {
-        return preferences.get(cle);
-    }
+        this.preferences = new HashMap<>();}
+    
     public void ajouterPreference(PreferenceType cle, String valeur) {
-        preferences.put(cle, valeur);
-    }
+        preferences.put(cle, valeur);}
+    
     public void modifierPreference(PreferenceType cle, String nouvelleValeur) {
-        preferences.put(cle, nouvelleValeur);
-    }
+        preferences.put(cle, nouvelleValeur);}
+    
     public void supprimerPreference(PreferenceType cle) {
-        preferences.remove(cle);
-    }
+        preferences.remove(cle);}
+    
     public void afficherPreferences() {
         for (PreferenceType cle : preferences.keySet()) {
-            System.out.println(cle + ": " + preferences.get(cle));
-        }
-    }
+            System.out.println(cle + ": " + preferences.get(cle));}}
+    
+    public String getPreference(PreferenceType cle) {
+        return preferences.get(cle);}
+    
+    public void setPreferences(Map<PreferenceType, String> nouvellesPreferences) {
+        this.preferences = nouvellesPreferences;}
 }
