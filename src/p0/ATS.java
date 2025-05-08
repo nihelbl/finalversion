@@ -1,6 +1,6 @@
 package p0;
 import p1.Profil;
-import p1.Evaluation;
+
 public class ATS extends Utilisateur {
     private int anneeRecrutement;
     private String serviceRattachement;
@@ -12,11 +12,13 @@ public class ATS extends Utilisateur {
         this.serviceRattachement = serviceRattachement;
     }
 
-    @Override
-    public void modifierProfil(Profil nouveauProfil) {
-        super.modifierProfil(nouveauProfil);
-        // Mettre à jour anneeRecrutement et service si nécessaire
-    }
+    public void setAnneeRecrutement(int anneeRecrutement) {
+    	if (anneeRecrutement > 0) {this.anneeRecrutement = anneeRecrutement;
+        System.out.println("Annéé de recrutement changée avec succées ! ");}}
+    
+    public void setServiceRattachement(String serviceRattachement) {
+    	if (serviceRattachement != null) {this.serviceRattachement = serviceRattachement;
+        System.out.println("Service de Rattachement changée avec succées ! ");}}
 
     @Override
     public void afficherProfil() {
@@ -24,12 +26,9 @@ public class ATS extends Utilisateur {
         System.out.println("ATS - Année de recrutement : " + anneeRecrutement);
         System.out.println("Service : " + serviceRattachement);
     }
-    @Override
-      public void ajouterEvaluation(Evaluation evaluation) {
-        super.ajouterEvaluation(evaluation); // conserve logique de mise à jour + commentaires + réputation
-    }
-    @Override
-    public void afficherHistorique() {
-        super.afficherHistorique();
-    }
+   
+    public int getAnneeRecrutement() {
+        return anneeRecrutement;}
+    public String getServiceRattachement() {
+        return serviceRattachement;}
 }

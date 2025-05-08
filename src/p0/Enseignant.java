@@ -1,6 +1,5 @@
 package p0;
 import p1.Profil;
-import p1.Evaluation;
 public class Enseignant extends Utilisateur {
     private int anneeRecrutement;
     private String faculte;
@@ -10,15 +9,16 @@ public class Enseignant extends Utilisateur {
                       int anneeRecrutement, String faculte) {
         super(nom, prenom, matricule, profil);
         this.anneeRecrutement = anneeRecrutement;
-        this.faculte = faculte;
-        
+        this.faculte = faculte; 
     }
 
-    @Override
-    public void modifierProfil(Profil nouveauProfil) {
-        super.modifierProfil(nouveauProfil);
-        // Mettre à jour anneeRecrutement et faculte si nécessaire
-    }
+    public void setFaculte(String faculte) {
+        if (faculte != null && !faculte.isEmpty()) { this.faculte = faculte;
+        System.out.println("Faculté changée avec succées ! ");}}
+    
+    public void setAnneeRecrutement(int anneeRecrutement) {
+    	if (anneeRecrutement > 0) {this.anneeRecrutement = anneeRecrutement;
+        System.out.println("Annéé de recrutement changée avec succées ! ");}}
 
     @Override
     public void afficherProfil() {
@@ -26,14 +26,13 @@ public class Enseignant extends Utilisateur {
         System.out.println("Enseignant - Année de recrutement : " + anneeRecrutement);
         System.out.println("Faculté : " + faculte);
     }
-    @Override
-      public void ajouterEvaluation(Evaluation evaluation) {
-        super.ajouterEvaluation(evaluation); // conserve logique de mise à jour + commentaires + réputation
-    }
-    @Override
-    public void afficherHistorique() {
-        super.afficherHistorique();
-    }
+    
+    public String getFaculte() {
+    	return faculte;}
+    
+    public int getAnneeRecrutement() {
+        return anneeRecrutement;}
+    
 }
 
 
