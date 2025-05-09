@@ -1,8 +1,7 @@
 package p2;
 import java.util.*;
 
-import monprojet.enums.StatutUser;
-import monprojet.enums.TypeCourse;
+import monprojet.enums.*;
 import p0.Utilisateur;
 import p0.Etudiant;
 import p0.ATS;
@@ -17,451 +16,321 @@ import p1.Itineraire;
 import p1.Planning;
 import p1.Preferences;
 
-/**
- * Classe principale qui lance l'application de covoiturage universitaire
- */
 public class Main {
-    private static Scanner scanner = new Scanner(System.in);
-    private static Administration admin = Administration.getInstance();
-    private static Utilisateur utilisateurConnecte = null;
-    private static boolean estAdmin = false;
-
     public static void main(String[] args) {
-        System.out.println("=======================================");
-        System.out.println("   COVOITURAGE UNIVERSITAIRE");
-        System.out.println("=======================================");
+        Scanner scanner = new Scanner(System.in);
+        HashMap<String, String> admins = new HashMap<>();
+        HashMap<String, String> etu = new HashMap<>();
+        HashMap<String, String> ens = new HashMap<>();
+        HashMap<String, String> ats = new HashMap<>();
         
-        // Initialiser quelques données de test
-        initialiserDonneesTest();
+        admins.put("232331531413", "nihel123");
+        admins.put("232331531414", "nazim123");
+        admins.put("232331531415", "malak123");
+        admins.put("232331531416", "mouna123");
         
+        Profil profil1 = new Profil();
+        Profil profil2 = new Profil();
+        Profil profil3 = new Profil();
+        Utilisateur e = new Etudiant("leclerc", "charles", "3849", profil1, 2023, "informatique", "acad");
+        etu.put("3849", "azerty");
+        Utilisateur en = new Enseignant("hamilton", "lewis", "2343", profil2, 2020, "informatique");
+        ens.put("2343", "azerty");
+        Utilisateur a = new ATS("Wolf", "toto", "1293", profil3, 2021, "chef departement");
+        ats.put("1293", "azerty");
         boolean continuer = true;
+
         while (continuer) {
-            if (utilisateurConnecte == null) {
-                afficherMenuConnexion();
-                int choix = lireEntier("Votre choix: ");
-                
-                switch (choix) {
-                    case 1:
-                        connexionUtilisateur();
-                        break;
-                    case 2:
-                        connexionAdmin();
-                        break;
-                    case 3:
-                        creerCompteUtilisateur();
-                        break;
-                    case 0:
-                        System.out.println("Au revoir !");
-                        continuer = false;
-                        break;
-                    default:
-                        System.out.println("Option invalide. Veuillez réessayer.");
-                }
-            } else if (estAdmin) {
-                gererMenuAdmin();
-            } else {
-                gererMenuUtilisateur();
+            System.out.println("=== Menu Principal ===");
+            System.out.println("1. Connexion Utilisateur");
+            System.out.println("2. Connexion Administrateur");
+            System.out.println("3. Quitter");
+            System.out.print("Choix : ");
+            int choix = scanner.nextInt();
+            scanner.nextLine();
+            switch (choix) {
+            case 1: 
+                System.out.println("1. Connexion");
+                System.out.println("2. Inscription");
+                System.out.print("Votre choix : ");
+                int sousChoix = scanner.nextInt();
+                System.out.println("Choisissez votre type :");
+            	System.out.println("1. Ãtudiant");
+            	System.out.println("2. Enseignant");
+            	System.out.println("3. ATS");
+            	int choixtype = scanner.nextInt();
+                scanner.nextLine();
+                if (sousChoix == 1) { // Connexion
+                    System.out.print("Entrez votre matricule : ");
+                    String matricule = scanner.nextLine();
+                    if (etu.containsKey(matricule)) {
+                        System.out.print("Entrez votre mot de passe : ");
+                        String mdp = scanner.nextLine();
+                        if (choixtype ==1) {
+                        if (etu.get(matricule).equals(mdp)) {
+                            System.out.println("Connexion rÃ©ussie !");
+                            //menuUtilisateur();
+                        } else {
+                            System.out.println("Mot de passe incorrect.");
+                        }}
+                        else if (choixtype == 2) {
+                            if (ens.get(matricule).equals(mdp)) {
+                                System.out.println("Connexion rÃ©ussie !");
+                                //menuutilisateur(Utilisateur );
+                            } else {
+                                System.out.println("Mot de passe incorrect.");
+                            }}
+                       else if (choixtype == 3) {
+                                if (ats.get(matricule).equals(mdp)) {
+                                    System.out.println("Connexion rÃ©ussie !");
+                                } else {
+                                    System.out.println("Mot de passe incorrect.");
+                                }}
+                    }
+                     else { System.out.println("Matricule inconnu. Veuillez vous inscrire.");} 
+                    }
+                   else if (sousChoix == 2) { // Inscription
+                    System.out.print("Entrez votre nom : ");
+                    String nom = scanner.nextLine();
+                    System.out.print("Entrez votre prÃ©nom : ");
+                    String prenom = scanner.nextLine();
+                    System.out.print("Entrez votre matricule : ");
+                    String matricule = scanner.nextLine();
+
+                    if (etu.containsKey(matricule) && ens.containsKey(matricule) && ats.containsKey(matricule))  {
+                        System.out.println("Ce matricule est dÃ©jÃ  utilisÃ©.");
+                    } else {
+                        System.out.print("Entrez votre mot de passe : ");
+                        String mdp = scanner.nextLine();
+                        if (choixtype ==1) {
+                        	System.out.print("Entrez votre annee d'admission : ");
+                            int anneeadmission = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.print("Entrez votre faculte : ");
+                            String faculte = scanner.nextLine();
+                            System.out.print("Entrez votre specialite : ");
+                            String specialite = scanner.nextLine();
+                            Profil profil = new Profil(); 
+                            Utilisateur nouveletudiant = new Etudiant(nom, prenom, matricule, profil,anneeadmission,faculte,specialite);
+                            etu.put(matricule, mdp);
+                        }
+                        else if (choixtype == 2) {
+                        	System.out.print("Entrez votre annee de recrutement : ");
+                            int anneerecrutement = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.print("Entrez votre faculte : ");
+                            String faculte = scanner.nextLine();
+                            Profil profil = new Profil(); 
+                            Utilisateur nouvelEnseignant = new Enseignant(nom, prenom, matricule, profil,anneerecrutement,faculte);
+                            ens.put(matricule, mdp);
+                        }
+                        else if (choixtype == 3) {
+                        	System.out.print("Entrez votre annee de recrutement : ");
+                            int anneerecrutement = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.print("Entrez votre servicerattachement : ");
+                            String servicerattachement = scanner.nextLine();
+                            Profil profil = new Profil(); 
+                            Utilisateur nouvelEnseignant = new Enseignant(nom, prenom, matricule, profil,anneerecrutement,servicerattachement);
+                            ats.put(matricule, mdp);
+                        }
+                    System.out.println("Inscription rÃ©ussie !");}
+                } 
+                  else {System.out.println("Choix invalide."); }
+                break;
+                case 2:
+                    System.out.print("ID admin : ");
+                    String idAdmin = scanner.nextLine();
+                    
+                    System.out.print("Mot de passe : ");
+                    String mdpAdmin = scanner.nextLine();
+                    if (admins.containsKey(idAdmin) && admins.get(idAdmin).equals(mdpAdmin)) {
+                        System.out.println("Connexion administrateur rÃ©ussie.");
+                        menuAdministrateur();
+                    } else {
+                        System.out.println("Identifiants administrateur incorrects.");
+                    }
+                    break;
+
+                case 3:
+                    continuer = false;
+                    System.out.println("Fermeture de l'application.");
+                    break;
+                default:
+                    System.out.println("Choix invalide.");
             }
         }
-        
-        scanner.close();
+            scanner.close();
     }
-    
-    /**
-     * Initialiser des données de test pour démonstration
-     */
-    
-    
-    /**
-     * Afficher le menu de connexion
-     */
-    private static void afficherMenuConnexion() {
-        System.out.println("\n--- MENU PRINCIPAL ---");
-        System.out.println("1. Se connecter en tant qu'utilisateur");
-        System.out.println("2. Se connecter en tant qu'administrateur");
-        System.out.println("3. Créer un compte utilisateur");
-        System.out.println("0. Quitter");
-    }
-    
-    
-     //Afficher tous les utilisateurs enregistrés
-     
-    private static void afficherTousLesUtilisateurs() {
-        System.out.println("\n--- LISTE DES UTILISATEURS ---");
-        List<Utilisateur> utilisateurs = admin.getUtilisateurs();
-        
-        if (utilisateurs.isEmpty()) {
-            System.out.println("Aucun utilisateur enregistré.");
-        } else {
-            for (Utilisateur u : utilisateurs) {
-                System.out.println("- " + u.getNom() + " " + u.getPrenom() + " (Matricule: " + u.getMatricule() + ")");
-                if (u instanceof Etudiant) {
-                    Etudiant e = (Etudiant) u;
-                    System.out.println("  Type: Étudiant");
-                    System.out.println("  Faculté: " + e.getFaculte() + ", Spécialité: " + e.getSpecialite());
-                } else if (u instanceof Enseignant) {
-                    Enseignant e = (Enseignant) u;
-                    System.out.println("  Type: Enseignant");
-                    System.out.println("  Faculté: " + e.getFaculte());
-                } else if (u instanceof ATS) {
-                    ATS a = (ATS) u;
-                    System.out.println("  Type: Personnel ATS");
-                    System.out.println("  Service: " + a.getServiceRattachement());
-                }
-                System.out.println("  Réputation: " + String.format("%.2f", u.getReputation()) + "/5");
-                System.out.println();
+    public static void menuUtilisateur(Utilisateur utilisateur, Administration admin, Scanner scanner) {
+        boolean continuer = true;
+
+        while (continuer) {
+            System.out.println("\n=== Menu Utilisateur ===");
+            System.out.println("1. Consulter mon profil");
+            System.out.println("2. Modifier mon profil"); // statique ou dynamique
+            System.out.println("3. Evaluer un utilisateur");
+            System.out.println("4. Ajouter un commentaire");
+            System.out.println("5. Rechercher une course");
+            System.out.println("6. Se dÃ©connecter");
+            System.out.print("Choix : ");
+            
+            int choix = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choix) {
+                case 1:
+                    utilisateur.afficherProfil();;
+                    break;
+
+                case 2:
+                    System.out.println("1. Modifier nom/prÃ©nom");
+                    System.out.println("2. Modifier informations de profil");
+                    int modif = scanner.nextInt();
+                    scanner.nextLine();
+                    if (modif == 1) {
+                        System.out.print("Nouveau nom : ");
+                        utilisateur.setNom(scanner.nextLine());
+                        System.out.print("Nouveau prÃ©nom : ");
+                        utilisateur.setPrenom(scanner.nextLine());
+                    } else if (modif == 2) {
+                        utilisateur.modifierProfilPersonnel(scanner, null, null)
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Matricule de l'utilisateur Ã  Ã©valuer : ");
+                    String matricule = scanner.nextLine();
+                    Utilisateur cible = admin.rechercherUtilisateurParMatricule(matricule);
+                    if (cible != null) {
+                        System.out.print("Note (0 Ã  5) : ");
+                        double note = scanner.nextDouble();
+                        scanner.nextLine();
+                        Evaluation eval = new Evaluation(note, utilisateur.getNom() + " " + utilisateur.getPrenom());
+                        cible.getHistorique().ajouterEvaluation(eval);
+                        System.out.println("Ãvaluation ajoutÃ©e !");
+                    } else {
+                        System.out.println("Utilisateur non trouvÃ©.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Matricule de l'utilisateur ciblÃ© : ");
+                    String matriculeComment = scanner.nextLine();
+                    Utilisateur cibleComment = admin.rechercherUtilisateurParMatricule(matriculeComment);
+                    if (cibleComment != null) {
+                        System.out.print("Commentaire : ");
+                        String commentaire = scanner.nextLine();
+                        Evaluation com = new Evaluation(commentaire, utilisateur.getNom() + " " + utilisateur.getPrenom());
+                        cibleComment.getHistorique().ajouterEvaluation(com);
+                        System.out.println("Commentaire ajoutÃ© !");
+                    } else {
+                        System.out.println("Utilisateur non trouvÃ©.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Recherche de course : Ã  implÃ©menter selon critÃ¨res (itinÃ©raire, jour...)");
+                    // Tu peux ajouter une recherche par jour, par lieu, etc.
+                    break;
+
+                case 6:
+                    System.out.println("DÃ©connexion rÃ©ussie.");
+                    continuer = false;
+                    break;
+
+                default:
+                    System.out.println("Choix invalide.");
+            }}}
+
+
+    public static void menuAdministrateur(Scanner scanner, Administration admin) {
+        boolean continuer = true;
+
+        while (continuer) {
+            System.out.println("\n=== Menu Administrateur ===");
+            System.out.println("1. Lister tous les utilisateurs");
+            System.out.println("2. Filtrer utilisateurs par type");
+            System.out.println("3. Supprimer un utilisateur");
+            System.out.println("4. Voir Ã©valuations dâun utilisateur");
+            System.out.println("5. RÃ©initialiser rÃ©putation");
+            System.out.println("6. Afficher les statistiques");
+            System.out.println("7. Voir toutes les courses");
+            System.out.println("8. Se dÃ©connecter");
+            System.out.print("Choix : ");
+            int choix = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choix) {
+                case 1:
+                    admin.afficherUtilisateurs();
+                    break;
+
+                case 2:
+                    System.out.println("1. Ãtudiant  2. Enseignant  3. ATS");
+                    int type = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (type) {
+                        case 1: admin.filtrerUtilisateursParStatut(Etudiant.class); break;
+                        case 2: admin.filtrerUtilisateursParStatut(Enseignant.class); break;
+                        case 3: admin.filtrerUtilisateursParStatut(ATS.class); break;
+                        default: System.out.println("Type invalide."); break;
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Matricule de l'utilisateur Ã  supprimer : ");
+                    String matriculeSup = scanner.nextLine();
+                    Utilisateur u = admin.rechercherUtilisateurParMatricule(matriculeSup);
+                    if (u != null) {
+                        admin.supprimerUtilisateur(u);
+                        System.out.println("Utilisateur supprimÃ©.");
+                    } else {
+                        System.out.println("Utilisateur introuvable.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Matricule de l'utilisateur : ");
+                    String matEval = scanner.nextLine();
+                    Utilisateur uEval = admin.rechercherUtilisateurParMatricule(matEval);
+                    if (uEval != null) {
+                        admin.afficherEvaluations(uEval);
+                    } else {
+                        System.out.println("Utilisateur introuvable.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.print("Matricule de l'utilisateur : ");
+                    String matRep = scanner.nextLine();
+                    Utilisateur uRep = admin.rechercherUtilisateurParMatricule(matRep);
+                    if (uRep != null) {
+                        admin.reinitialiserReputation(uRep);
+                        System.out.println("RÃ©putation rÃ©initialisÃ©e.");
+                    } else {
+                        System.out.println("Utilisateur introuvable.");
+                    }
+                    break;
+
+                case 6:
+                    admin.afficherStatistiquesGlobales();
+                    break;
+
+                case 7:
+                    admin.afficherCoursesParStatut(Statut.EN_COURS);
+                    admin.afficherCoursesParStatut(Statut.TERMINEE);
+                    break;
+
+                case 8:
+                    continuer = false;
+                    System.out.println("DÃ©connexion...");
+                    break;
+
+                default:
+                    System.out.println("Choix invalide.");
             }
         }
     }
-    
-    /**
-     * Bannir un utilisateur du système
-     */
-    private static void bannirUtilisateur() {
-        System.out.println("\n--- BANNIR UN UTILISATEUR ---");
-        String matricule = lireChaine("Matricule de l'utilisateur à bannir: ");
-        
-        Utilisateur utilisateur = admin.rechercherUtilisateur(matricule);
-        if (utilisateur == null) {
-            System.out.println("Erreur: Utilisateur non trouvé.");
-            return;
-        }
-        
-        System.out.println("Vous êtes sur le point de bannir: " + utilisateur.getNom() + " " + utilisateur.getPrenom());
-        String confirmation = lireChaine("Confirmer? (O/N): ");
-        
-        if (confirmation.equalsIgnoreCase("O")) {
-            admin.bannirUtilisateur(utilisateur);
-            System.out.println("L'utilisateur a été banni avec succès.");
-        } else {
-            System.out.println("Opération annulée.");
-        }
-    }
-    
-    /**
-     * Ajouter un nouveau compte administrateur
-     */
-    private static void ajouterCompteAdmin() {
-        System.out.println("\n--- AJOUTER UN ADMINISTRATEUR ---");
-        String id = lireChaine("Nouvel identifiant admin: ");
-        String motDePasse = lireChaine("Mot de passe: ");
-        
-        if (admin.ajouterCompteAdmin(id, motDePasse)) {
-            System.out.println("Compte administrateur créé avec succès.");
-        } else {
-            System.out.println("Erreur: Cet identifiant existe déjà.");
-        }
-    }
-    
-    /**
-     * Changer le mot de passe utilisateur
-     */
-    private static void changerMotDePasse() {
-        System.out.println("\n--- CHANGER MOT DE PASSE ---");
-        String ancienMdp = lireChaine("Ancien mot de passe: ");
-        String nouveauMdp = lireChaine("Nouveau mot de passe: ");
-        
-        if (estAdmin) {
-            String id = utilisateurConnecte.getPrenom(); // Dans notre implémentation, on utilise le prénom pour stocker l'id admin
-            if (admin.modifierMotDePasseAdmin(id, ancienMdp, nouveauMdp)) {
-                System.out.println("Mot de passe modifié avec succès.");
-            } else {
-                System.out.println("Erreur: Ancien mot de passe incorrect.");
-            }
-        } else {
-            if (admin.modifierMotDePasseUtilisateur(utilisateurConnecte.getMatricule(), ancienMdp, nouveauMdp)) {
-                System.out.println("Mot de passe modifié avec succès.");
-            } else {
-                System.out.println("Erreur: Ancien mot de passe incorrect.");
-            }
-        }
-    }
-    
-    /**
-     * Afficher le planning des courses
-     */
-    private static void afficherPlanningCourses() {
-        System.out.println("\n--- PLANNING DES COURSES ---");
-        System.out.println("1. Courses en cours");
-        System.out.println("2. Courses à venir");
-        System.out.println("3. Historique des courses");
-        int choix = lireEntier("Votre choix: ");
-        
-        switch (choix) {
-            case 1:
-                afficherCoursesEnCours();
-                break;
-            case 2:
-                afficherCoursesAvenir();
-                break;
-            case 3:
-                afficherHistoriqueCourses();
-                break;
-            default:
-                System.out.println("Option invalide.");
-        }
-    }
-    
-    /**
-     * Afficher les courses en cours
-     */
-    private static void afficherCoursesEnCours() {
-        List<Course> courses = admin.getPlanning().getCoursesEnCours();
-        if (courses.isEmpty()) {
-            System.out.println("Aucune course en cours actuellement.");
-            return;
-        }
-        
-        System.out.println("\n=== COURSES EN COURS ===");
-        for (Course c : courses) {
-            afficherDetailsCourse(c);
-        }
-    }
-    
-    /**
-     * Afficher les courses à venir
-     */
-    private static void afficherCoursesAvenir() {
-        List<Course> courses = admin.getPlanning().getCoursesAvenir();
-        if (courses.isEmpty()) {
-            System.out.println("Aucune course à venir actuellement.");
-            return;
-        }
-        
-        System.out.println("\n=== COURSES À VENIR ===");
-        for (Course c : courses) {
-            afficherDetailsCourse(c);
-        }
-    }
-    
-    /**
-     * Afficher l'historique des courses
-     */
-    private static void afficherHistoriqueCourses() {
-        List<Course> courses = admin.getPlanning().getHistoriqueCourses();
-        if (courses.isEmpty()) {
-            System.out.println("Aucune course dans l'historique.");
-            return;
-        }
-        
-        System.out.println("\n=== HISTORIQUE DES COURSES ===");
-        for (Course c : courses) {
-            afficherDetailsCourse(c);
-        }
-    }
-    
-    /**
-     * Afficher les détails d'une course
-     */
-    private static void afficherDetailsCourse(Course course) {
-        System.out.println("------------------------------");
-        System.out.println("Chauffeur: " + course.getChauffeur().getNom() + " " + course.getChauffeur().getPrenom());
-        System.out.println("Itinéraire: " + course.getItineraire().getPointDepart() + " -> " + course.getItineraire().getPointArrivee());
-        System.out.println("Points d'arrêt: " + course.getItineraire().getPointsIntermediaires());
-        System.out.println("Type: " + course.getTypeCourse());
-        System.out.println("Disponibilité: " + course.getDisponibilite().getJoursDisponibles() + " à " + course.getDisponibilite().getHeureDepart());
-        System.out.println("Places: " + course.getPassagers().size() + "/" + course.getNombrePlacesDisponibles());
-        
-        if (!course.getPassagers().isEmpty()) {
-            System.out.println("Passagers:");
-            for (Utilisateur p : course.getPassagers()) {
-                System.out.println("- " + p.getNom() + " " + p.getPrenom());
-            }
-        }
-        System.out.println("------------------------------");
-    }
-    
-    /**
-     * Gérer le menu administrateur
-     */
-    private static void gererMenuAdmin() {
-        System.out.println("\n--- MENU ADMINISTRATEUR ---");
-        System.out.println("1. Afficher tous les utilisateurs");
-        System.out.println("2. Afficher les courses en cours");
-        System.out.println("3. Afficher les statistiques");
-        System.out.println("4. Afficher les meilleurs chauffeurs");
-        System.out.println("5. Afficher les utilisateurs à faible réputation");
-        System.out.println("6. Bannir un utilisateur");
-        System.out.println("7. Ajouter un compte administrateur");
-        System.out.println("8. Afficher le planning des courses");
-        System.out.println("0. Se déconnecter");
-        
-        int choix = lireEntier("Votre choix: ");
-        
-        switch (choix) {
-            case 1:
-                afficherTousLesUtilisateurs();
-                break;
-            case 2:
-                admin.afficherCoursesEnCours();
-                break;
-            case 3:
-                admin.afficherStatistiques();
-                break;
-            case 4:
-                admin.afficherTopChauffeurs(5);
-                break;
-            case 5:
-                admin.afficherPiresUtilisateurs(2.5);
-                break;
-            case 6:
-                bannirUtilisateur();
-                break;
-            case 7:
-                ajouterCompteAdmin();
-                break;
-            case 8:
-                afficherPlanningCourses();
-                break;
-            case 0:
-                System.out.println("Déconnexion...");
-                utilisateurConnecte = null;
-                estAdmin = false;
-                break;
-            default:
-                System.out.println("Option invalide. Veuillez réessayer.");
-        }
-    }
-    
-    /**
-     * Gérer le menu utilisateur
-     */
-    private static void gererMenuUtilisateur() {
-        System.out.println("\n--- MENU UTILISATEUR ---");
-        System.out.println("1. Afficher mon profil");
-        System.out.println("2. Modifier mon profil");
-        System.out.println("3. Rechercher une course");
-        System.out.println("4. Proposer une course");
-        System.out.println("5. Mes courses");
-        System.out.println("6. Changer mon mot de passe");
-        System.out.println("0. Se déconnecter");
-        
-        int choix = lireEntier("Votre choix: ");
-        
-        switch (choix) {
-            case 1:
-                utilisateurConnecte.afficherProfil();
-                break;
-            case 2:
-                // TODO: Implémenter la modification du profil
-                System.out.println("Fonctionnalité en cours de développement...");
-                break;
-            case 3:
-                // TODO: Implémenter la recherche de course
-                System.out.println("Fonctionnalité en cours de développement...");
-                break;
-            case 4:
-                // TODO: Implémenter la proposition de course
-                System.out.println("Fonctionnalité en cours de développement...");
-                break;
-            case 5:
-                // TODO: Implémenter l'affichage des courses de l'utilisateur
-                System.out.println("Fonctionnalité en cours de développement...");
-                break;
-            case 6:
-                changerMotDePasse();
-                break;
-            case 0:
-                System.out.println("Déconnexion...");
-                utilisateurConnecte = null;
-                break;
-            default:
-                System.out.println("Option invalide. Veuillez réessayer.");
-        }
-    }
-    
-    /**
-     * Connexion en tant qu'utilisateur
-     */
-    private static void connexionUtilisateur() {
-        System.out.println("\n--- CONNEXION UTILISATEUR ---");
-        String matricule = lireChaine("Matricule: ");
-        String motDePasse = lireChaine("Mot de passe: ");
-        
-        if (admin.connexionUtilisateur(matricule, motDePasse)) {
-            utilisateurConnecte = admin.rechercherUtilisateur(matricule);
-            if (utilisateurConnecte != null) {
-                System.out.println("Connexion réussie ! Bienvenue " + utilisateurConnecte.getPrenom() + " " + utilisateurConnecte.getNom());
-            } else {
-                System.out.println("Erreur: Utilisateur non trouvé malgré identifiants valides.");
-                utilisateurConnecte = null;
-            }
-        } else {
-            System.out.println("Erreur: Matricule ou mot de passe incorrect.");
-        }
-    }
-    
-    /**
-     * Connexion en tant qu'administrateur
-     */
-    private static void connexionAdmin() {
-        System.out.println("\n--- CONNEXION ADMINISTRATEUR ---");
-        String id = lireChaine("Identifiant: ");
-        String motDePasse = lireChaine("Mot de passe: ");
-        
-        if (admin.connexionAdmin(id, motDePasse)) {
-            estAdmin = true;
-            utilisateurConnecte = new Utilisateur() {
-                @Override
-                public String getNom() {
-                    return "Admin";
-                }
-                
-                @Override
-                public String getPrenom() {
-                    return id;
-                }
-            };
-            System.out.println("Connexion administrateur réussie !");
-        } else {
-            System.out.println("Erreur: Identifiant ou mot de passe incorrect.");
-        }
-    }
-    
-    /**
-     * Créer un compte utilisateur
-     */
-    private static void creerCompteUtilisateur() {
-        System.out.println("\n--- CRÉATION DE COMPTE ---");
-        String matricule = lireChaine("Matricule: ");
-        
-        if (admin.utilisateurExiste(matricule)) {
-            System.out.println("Erreur: Ce matricule existe déjà.");
-            return;
-        }
-        
-        String motDePasse = lireChaine("Mot de passe: ");
-        String nom = lireChaine("Nom: ");
-        String prenom = lireChaine("Prénom: ");
-        
-        System.out.println("Type d'utilisateur:");
-        System.out.println("1. Étudiant");
-        System.out.println("2. Enseignant");
-        System.out.println("3. Personnel ATS");
-        int typeUtilisateur = lireEntier("Votre choix: ");
-        
-        Utilisateur nouvelUtilisateur = null;
-        
-        switch (typeUtilisateur) {
-            case 1:
-                int anneeAdmission = lireEntier("Année d'admission: ");
-                String faculte = lireChaine("Faculté: ");
-                String specialite = lireChaine("Spécialité: ");
-                nouvelUtilisateur = new Etudiant(nom, prenom, matricule, anneeAdmission, faculte, specialite);
-                break;
-            case 2:
-                int anneeRecrutementEns = lireEntier("Année de recrutement: ");
-                String faculteEns = lireChaine("Faculté: ");
-                nouvelUtilisateur = new Enseignant(nom, prenom, matricule, anneeRecrutementEns, faculteEns);
-                break;
-            case 3:
-                int anneeRecrutementATS = lireEntier("Année de recrutement: ");
-                String service = lireChaine("Service de rattachement: ");
-                nouvelUtilisateur = new ATS(nom, prenom, matricule, anneeRecrutementATS, service);
-                break;
-            default:
-                System.out.println("Type d'utilisateur invalide.");
-                return;
-        }
-        
-        
+
+}
