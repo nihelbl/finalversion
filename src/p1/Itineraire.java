@@ -1,5 +1,4 @@
 package p1;
-import p0.Utilisateur;
 
 import java.util.*;
 
@@ -34,4 +33,5 @@ import java.util.*;
       public void setPointArrivee(String pointArrivee) { this.pointArrivee = pointArrivee; }
       public List<String> getPointsIntermediaires() { return pointsIntermediaires; }
  }
+
 
