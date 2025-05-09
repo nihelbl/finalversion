@@ -1,5 +1,5 @@
 package p1;
-import p0.Utilisateur;
+
 import monprojet.enums.Statut;
 import monprojet.enums.TypeCourse;
 
@@ -44,24 +44,24 @@ public class HistoriqueUtilisateur {
     }
 
     public void afficherHistorique() {
-        System.out.println("— Itinéraires précédents —");
+        System.out.println("â ItinÃ©raires prÃ©cÃ©dents â");
         for (Itineraire itin : anciensItineraires) {
             itin.afficherItineraire();
         }
 
-        System.out.println("— Statuts précédents —");
+        System.out.println("â Statuts prÃ©cÃ©dents â");
         for (Statut s : anciensStatuts) {
             System.out.println("- " + s);
         }
 
-        System.out.println("— Types de course précédents —");
+        System.out.println("â Types de course prÃ©cÃ©dents â");
         for (TypeCourse t : anciensTypesCourse) {
             System.out.println("- " + t);
         }
 
-        System.out.println("— Évaluations reçues —");
+        System.out.println("â Ãvaluations reÃ§ues â");
         for (Evaluation e : evaluations) {
-            System.out.println("- Critère : " + e.getCritereEvaluation() +
+            System.out.println("- CritÃ¨re : " + e.getCritereEvaluation() +
                    " | Note : " + e.getNoteGlobale() +
                    " | Commentaire : " + e.getCommentaire() );
 
