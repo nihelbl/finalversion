@@ -1,67 +1,68 @@
 package p1;
-import p0.Utilisateur;
 import monprojet.enums.*;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 public class Profil {
     private StatutUser statut;
     private TypeCourse typeCourse;
     private Itineraire itineraire;
-    private Preferences preferences;
+    private Preferences preferences; 
     private Disponibilites disponibilites;
-    private Planning planning;
-
+    
     public Profil() {}
     public Profil(StatutUser statut, TypeCourse typeCourse, Itineraire itineraire,
-                  Preferences preferences, Disponibilites disponibilites, Planning planning) {
+    		Preferences preferences, Disponibilites disponibilites) {
         this.statut = statut;
         this.typeCourse = typeCourse;
         this.itineraire = itineraire;
         this.preferences = preferences;
-        this.disponibilites = disponibilites;
-        this.planning = planning;}
+        this.disponibilites = disponibilites;}
     
-    public void modifierProfildynamique(StatutUser nouveauStatut, TypeCourse nouveauTypeCourse,Itineraire nouvelItineraire, Preferences nouvellesPreferences,Disponibilites nouvellesDisponibilites) {
-               if (nouveauStatut != null) {setStatut(nouveauStatut);}
-               if (nouveauTypeCourse != null) {setTypeCourse(nouveauTypeCourse);}
-               if (nouvelItineraire != null) {setItineraire(nouvelItineraire);}
-               if (nouvellesPreferences != null) {setPreferences(nouvellesPreferences);}
-               if (nouvellesDisponibilites != null) {setDisponibilites(nouvellesDisponibilites);}}
+    public void setStatut(StatutUser statut) {
+        this.statut = statut;}
 
-    public void modifierStatut(StatutUser nouveauStatut) {
-        this.statut = nouveauStatut;}
- 
-    public void modifierTypeCourse(TypeCourse nouveauTypeCourse) {
-        this.typeCourse = nouveauTypeCourse;}
+    public void setTypeCourse(TypeCourse typeCourse) {
+        this.typeCourse = typeCourse;}
 
-    public void modifierItineraire(Itineraire nouvelItineraire) {
-        this.itineraire = nouvelItineraire;}
+    public void setItineraire(Itineraire itineraire) {
+        this.itineraire = itineraire;}
 
-    public void modifierPreferences(Preferences nouvellesPreferences) {
-        this.preferences = nouvellesPreferences;}
+    public void setPreferences(Preferences preferences) {
+        this.preferences = preferences;}
 
+    public void setDisponibilites(Disponibilites disponibilites) {
+        this.disponibilites = disponibilites;}
+    
     public void modifierDisponibilites(Disponibilites nouvellesDisponibilites) {
         this.disponibilites = nouvellesDisponibilites;}
-
+    
     public boolean estDisponible(LocalDateTime dateHeure) {
-    	JourSemaine jour = JourSemaine.from(dateHeure.getDayOfWeek());
-        return disponibilites.getJoursDisponibles().contains(jour);} 
+        JourSemaine jour = JourSemaine.from(dateHeure.getDayOfWeek());
+        return disponibilites.getDisponibilitesParJour().containsKey(jour);
+    }
     
     public void afficherProfildynamique() {
-        System.out.println("Profil{" +
-            "statut=" + statut +
-            ", typeCourse=" + typeCourse +
-            ", itineraire=" + itineraire +
-            ", preferences=" + preferences +
-            ", disponibilites=" + disponibilites +
-            '}');}
+        System.out.println("Profil {");
+        System.out.println("  Statut: " + statut);
+        System.out.println("  Type de course: " + typeCourse);
+         itineraire.afficherItineraire();
+         preferences.afficherPreferences();
+         disponibilites.afficherDisponibilites();
+        System.out.println("}");
+    }
+    
+    public void modifierProfilDynamique(StatutUser statut, TypeCourse typeCourse, Itineraire itineraire,
+    		Preferences preferences, Disponibilites disponibilites) {
+              if (statut != null) {this.statut = statut;}
+              if (typeCourse != null) {this.typeCourse = typeCourse;}
+              if (itineraire != null) {this.itineraire = itineraire;}
+              if (preferences != null) {this.preferences = preferences;}
+              if (disponibilites != null) {this.disponibilites = disponibilites;}}
+
 
     // Getters (si besoin)
-    public Preferences getPreferences() { return preferences; }
-    public Disponibilites getDisponibilites() { return disponibilites;}
-    public Planning getPlanning() {return planning;}
-    
-    public void setPreferences(Preferences preferences) { this.preferences = preferences;}
-    public void setDisponibilites(Disponibilites disponibilites) { this.disponibilites = disponibilites;}
-    public void setPlanning(Planning planning) {this.planning = planning; }
+    public StatutUser getStatut() { return statut; }
+    public TypeCourse getTypeCourse() { return typeCourse; }
+    public Itineraire getItineraire() { return itineraire; }
+    public Preferences getPreferences() {return preferences;}
+    public Disponibilites getDisponibilites() { return disponibilites; }
 }
