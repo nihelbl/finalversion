@@ -1,6 +1,8 @@
 package p1;
 import java.util.ArrayList;
 import java.util.List;
+import monprojet.enums.*;
+import p0.Utilisateur;
 
 
 public class Planning {
@@ -23,34 +25,36 @@ public class Planning {
         historiqueCourses.add(course);
         System.out.println("Course terminee et ajoutee à l’historique");}
 
-    public void afficherPlanningJournalier(String jour) {
-        System.out.println("Courses prevues pour le jour : " + jour);
+    public void afficherPlanningJournalier(JourSemaine jour) {
+        System.out.println("Courses prévues pour le jour : " + jour);
         for (Course c : coursesAvenir) {
-            if (c.getDisponibilite().getJoursDisponibles().contains(jour)) {
+            Utilisateur chauffeur = c.getChauffeur();
+            if (chauffeur.getProfil().getDisponibilites().getJoursDisponibles().contains(jour)) {
                 c.afficherDetails();}}}
+
+
 
     public void afficherPlanningHebdomadaire(String semaine) {
         System.out.println("Planning hebdomadaire : " + semaine);
         for (Course c : coursesAvenir) {
-            c.afficherDetails();}
+            c.afficherDetails();
+        }
         if (historiqueCourses.isEmpty()) {
             System.out.println("Aucune course enregistree dans l’historique.");
         } else {
             for (Course course : historiqueCourses) {
-                course.afficherDetails();}
-        }}
-
-    public void afficherHistorique() {
-        System.out.println("Historique des courses terminees :");
-        for (Course c : historiqueCourses) {
-            c.afficherDetails();}}
+                course.afficherDetails();
+            }}}
 
     public List<Course> getCoursesEnCours() {
-        return coursesEnCours;}
+        return coursesEnCours;
+    }
 
     public List<Course> getCoursesAvenir() {
-        return coursesAvenir;}
+        return coursesAvenir;
+    }
 
     public List<Course> getHistoriqueCourses() {
-        return historiqueCourses;}
+        return historiqueCourses;
+    }
 }
