@@ -10,25 +10,20 @@ public class Course {
     private Utilisateur chauffeur;
     private List<Utilisateur> passagers;
     private Itineraire itineraire;
-    private Disponibilites disponibilite;
     private TypeCourse typeCourse;
     private Statut statut;
     protected int nombrePlacesDisponibles;
 
-    public Course(Utilisateur chauffeur, Itineraire itineraire, Disponibilites disponibilite,
-                  TypeCourse typeCourse, int nombrePlacesDisponibles) {
+    public Course(Utilisateur chauffeur, Itineraire itineraire,TypeCourse typeCourse, int nombrePlacesDisponibles) {
         this.chauffeur = chauffeur;
         this.passagers = new ArrayList<>();
         this.itineraire = itineraire;
-        this.disponibilite = disponibilite;
         this.statut = Statut.EN_COURS;
         this.typeCourse = typeCourse;
-        this.nombrePlacesDisponibles = nombrePlacesDisponibles;
-    }
+        this.nombrePlacesDisponibles = nombrePlacesDisponibles;}
 
     public boolean estDisponible() {
-        return (statut == Statut.EN_COURS && passagers.size() < nombrePlacesDisponibles);
-    }
+        return (statut == Statut.EN_COURS && passagers.size() < nombrePlacesDisponibles);}
 
     public boolean ajouterPassager(Utilisateur passager) {
         if (estDisponible()) {
@@ -36,7 +31,7 @@ public class Course {
             System.out.println("Passager ajoute: " + passager.getNom());
             return true;
         } else {
-            System.out.println("Impossible d’ajouter le passager !");
+            System.out.println("Impossible dâajouter le passager !");
             return false;
         }
     }
@@ -45,7 +40,7 @@ public class Course {
         if (passagers.remove(passager)) {
             System.out.println("Passager retire : " + passager.getNom());
         } else {
-            System.out.println("Ce passager n’est pas dans la course !");
+            System.out.println("Ce passager nâest pas dans la course !");
         }
     }
 
@@ -66,23 +61,17 @@ public class Course {
     }
 
     public Statut getStatut() {
-        return statut;
-    }
+        return statut;}
 
     public List<Utilisateur> getPassagers() {
-        return passagers;
-    }
+        return passagers;}
 
     public Utilisateur getChauffeur() {
-        return chauffeur;
-    }
+        return chauffeur;}
 
-    public Disponibilites getDisponibilite() {
-        return disponibilite;
-    }
+    
     public Itineraire getItineraire(){
-        return itineraire;
-    }
+        return itineraire;}
 
     public void afficherDetails() {
         System.out.println("========== Details de la Course ==========");
@@ -93,8 +82,6 @@ public class Course {
         for (Utilisateur p : passagers) {
             System.out.println(" - " + p.getNom());
         }
-        System.out.println("Disponibilite : ");
-        disponibilite.afficherDisponibilite();
         System.out.println("Places restantes : " + placesRestantes());
         System.out.println("Statut : " + statut);
     }
