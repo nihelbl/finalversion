@@ -1,14 +1,13 @@
 package p1;
-import p0.Utilisateur;
+
 import monprojet.enums.CritereEvaluation;
 import java.time.LocalDateTime;
-
 import p0.Utilisateur;
 
 public class Evaluation {
     private Utilisateur evaluateur;
     private Utilisateur utilisateurEvalue;
-    private int noteGlobale;  // De 1 à 5
+    private int noteGlobale;
     private CritereEvaluation critereEvaluation;
     private String commentaire;
     private LocalDateTime dateEvaluation;
@@ -16,8 +15,7 @@ public class Evaluation {
     public Evaluation(Utilisateur evaluateur, Utilisateur utilisateurEvalue, int noteGlobale,
                       CritereEvaluation critereEvaluation, String commentaire) {
         if (noteGlobale < 1 || noteGlobale > 5) {
-            throw new IllegalArgumentException("La note doit être entre 1 et 5");// controll
-        }
+            throw new IllegalArgumentException("La note doit être entre 1 et 5");}
         this.evaluateur = evaluateur;
         this.utilisateurEvalue = utilisateurEvalue;
         this.noteGlobale = noteGlobale;
