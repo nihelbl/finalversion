@@ -58,7 +58,7 @@ public class Application {
                 System.out.print("Votre choix : ");
                 int sousChoix = scanner.nextInt();
                 System.out.println("Choisissez votre type :");
-            	System.out.println("1. Étudiant");
+            	System.out.println("1. Ãtudiant");
             	System.out.println("2. Enseignant");
             	System.out.println("3. ATS");
             	int choixtype = scanner.nextInt();
@@ -71,7 +71,7 @@ public class Application {
                         String mdp = scanner.nextLine();
                         if (choixtype ==1) {
                         if (etu.get(matricule).equals(mdp)) {
-                            System.out.println("Connexion réussie !");
+                            System.out.println("Connexion rÃ©ussie !");
                             Utilisateur user = trouverUtilisateur(utilisateurs,matricule);
                             menuutilisateur(user);
                             
@@ -80,7 +80,7 @@ public class Application {
                         }}
                         else if (choixtype == 2) {
                             if (ens.get(matricule).equals(mdp)) {
-                                System.out.println("Connexion réussie !");
+                                System.out.println("Connexion rÃ©ussie !");
                                 Utilisateur user = trouverUtilisateur(utilisateurs,matricule);
                                 menuutilisateur(user);
                             } else {
@@ -88,7 +88,7 @@ public class Application {
                             }}
                        else if (choixtype == 3) {
                                 if (ats.get(matricule).equals(mdp)) {
-                                    System.out.println("Connexion réussie !");
+                                    System.out.println("Connexion rÃ©ussie !");
                                     Utilisateur user = trouverUtilisateur(utilisateurs,matricule);
                                     menuutilisateur(user);
                                 } else {
@@ -100,13 +100,13 @@ public class Application {
                    else if (sousChoix == 2) { // Inscription
                     System.out.print("Entrez votre nom : ");
                     String nom = scanner.nextLine();
-                    System.out.print("Entrez votre prénom : ");
+                    System.out.print("Entrez votre prÃ©nom : ");
                     String prenom = scanner.nextLine();
                     System.out.print("Entrez votre matricule : ");
                     String matricule = scanner.nextLine();
 
                     if (etu.containsKey(matricule) && ens.containsKey(matricule) && ats.containsKey(matricule))  {
-                        System.out.println("Ce matricule est déjà utilisé.");
+                        System.out.println("Ce matricule est dÃ©jÃ  utilisÃ©.");
                     } else {
                         System.out.print("Entrez votre mot de passe : ");
                         String mdp = scanner.nextLine();
@@ -146,7 +146,7 @@ public class Application {
                             ats.put(matricule, mdp);
                             utilisateurs.add(nouvelATS);
                         }
-                    System.out.println("Inscription réussie !");}
+                    System.out.println("Inscription rÃ©ussie !");}
                 } 
                   else {System.out.println("Choix invalide."); }
                 break;
@@ -157,7 +157,7 @@ public class Application {
                     System.out.print("Mot de passe : ");
                     String mdpAdmin = scanner.nextLine();
                     if (admins.containsKey(idAdmin) && admins.get(idAdmin).equals(mdpAdmin)) {
-                        System.out.println("Connexion administrateur réussie.");
+                        System.out.println("Connexion administrateur rÃ©ussie.");
                         menuAdministrateur();
                     } else {
                         System.out.println("Identifiants administrateur incorrects.");
@@ -186,6 +186,6 @@ public class Application {
     }
 
     public static void menuAdministrateur() {
-        System.out.println("Menu Administrateur - en développement");
+        System.out.println("Menu Administrateur - en dÃ©veloppement");
     }
 }
